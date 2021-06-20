@@ -6,7 +6,7 @@
 /*   By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 18:16:24 by caugusta          #+#    #+#             */
-/*   Updated: 2021/06/20 20:23:54 by caugusta         ###   ########.fr       */
+/*   Updated: 2021/06/20 21:05:07 by caugusta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,14 @@ void	create_stack(char **a, t_list **stack_a)
 	int		j;
 	t_list	*new;
 	int		tmp;
+	t_list	*last;
+	t_list	*keep;
 
+	*stack_a = keep;
+	last = *stack_a;
+	if (*stack_a != NULL)
+		last = ft_lstlast(*stack_a);
+	// write(1, "here\n", 5);
 	j = 0;
 	while (a[j] != NULL)
 	{
@@ -67,14 +74,29 @@ void	create_stack(char **a, t_list **stack_a)
 		new = ft_lstnew(&tmp);
 		if (new == NULL)
 			exit_fun();
-		ft_lstadd_back(&stack_a, new);
+		write(1, "here\n", 5);
+		if (*stack_a == NULL)
+		{
+			write(1, "aere\n", 5);
+			*stack_a = new;
+			keep = *stack_a;
+		}
+		else
+		{
+			//keep = *stack_a;
+			(*stack_a)->next = new;
+			*stack_a = (*stack_a)->next;
+		}
+		//printf("<%d\n", *(int *)(keep)->content);
+		printf(">%d\n", *(int *)(*stack_a)->content);
+		// ft_lstadd_back(&stack_a, new);
 		j++;
-		// printf("1%d\n", *(int *)(new)->content);
 	}
-	while ((*stack_a))
+	*stack_a = last;
+	while ((keep))
 	{
-		printf("%d\n", *(int *)(*stack_a)->content);
-		(*stack_a) = (*stack_a)->next;
+		printf("%d\n", *(int *)(keep)->content);
+		(keep) = (keep)->next;
 	}
 }
 
