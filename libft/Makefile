@@ -6,7 +6,7 @@
 #    By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/23 18:32:18 by caugusta          #+#    #+#              #
-#    Updated: 2021/05/12 19:20:00 by caugusta         ###   ########.fr        #
+#    Updated: 2021/06/20 16:32:26 by caugusta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRC =		ft_atoi.c		ft_isalpha.c		ft_itoa.c\
 			ft_strlcpy.c	ft_strnstr.c		ft_isalnum.c\
 			ft_isprint.c	ft_memcmp.c			ft_putchar_fd.c\
 			ft_strchr.c		ft_strlen.c			ft_strrchr.c\
-			ft_substr.c		ft_strjoin.c		get_next_line.c\
+			ft_substr.c		ft_strjoin.c\
 			ft_split.c		ft_strtrim.c\
 			ft_lstnew.c		ft_lstadd_front.c	ft_lstsize.c\
 			ft_lstlast.c	ft_lstadd_back.c	ft_lstdelone.c\

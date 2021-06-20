@@ -6,11 +6,11 @@
 /*   By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 19:51:04 by caugusta          #+#    #+#             */
-/*   Updated: 2021/05/27 21:27:16 by caugusta         ###   ########.fr       */
+/*   Updated: 2021/06/20 16:13:44 by caugusta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
 void	sa(t_list *stack)
 {

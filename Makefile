@@ -6,7 +6,7 @@
 #    By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/10 22:20:54 by caugusta          #+#    #+#              #
-#    Updated: 2021/05/18 19:43:26 by caugusta         ###   ########.fr        #
+#    Updated: 2021/06/20 18:19:39 by caugusta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CFLAGS				= #-Wall -Wextra -Werror
 
 OBJ_DIR				= object/
 SOURCE_DIR			= source/
-SOURCE				= push_swap.c
+SOURCE				= push_swap.c	parser.c
 
 LIBFT				= libft/$(LIBFT_NAME)
 LIBFT_DIR			= libft/
