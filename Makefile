@@ -35,7 +35,7 @@ sub_directory :
 	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)%.o : $(SOURCE_DIR)%.c
-	@$(CC) -c -MMD $(CFLAGS) -I includes $< -o $@
+	@$(CC) -g -c -MMD $(CFLAGS) -I includes $< -o $@
 
 $(NAME) : $(LIBFT) $(OBJ)
 	@$(CC) $(CFLAGS) $^ -o $@

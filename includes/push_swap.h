@@ -19,6 +19,6 @@ int		check_valid(char **argv);
 void	create_stack(char **a, t_list **stack_a);
 int		check_list(t_list *stack_a);
 void	exit_fun();
-
+void	cs_2d_arr(char **s, int count);
 
 #endif
