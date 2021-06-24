@@ -6,7 +6,7 @@
 /*   By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/17 00:26:44 by caugusta          #+#    #+#             */
-/*   Updated: 2021/05/18 19:43:03 by caugusta         ###   ########.fr       */
+/*   Updated: 2021/06/24 04:29:10 by caugusta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
+	int 			index;
 }					t_list;
 
 int		ft_atoi(const char *str);

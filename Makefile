@@ -6,7 +6,7 @@
 #    By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/10 22:20:54 by caugusta          #+#    #+#              #
-#    Updated: 2021/06/20 18:19:39 by caugusta         ###   ########.fr        #
+#    Updated: 2021/06/24 06:10:47 by caugusta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ sub_directory :
 	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)%.o : $(SOURCE_DIR)%.c
-	@$(CC) -g -c -MMD $(CFLAGS) -I includes $< -o $@
+	@$(CC) -c -MMD $(CFLAGS) -I includes $< -o $@
 
 $(NAME) : $(LIBFT) $(OBJ)
 	@$(CC) $(CFLAGS) $^ -o $@
