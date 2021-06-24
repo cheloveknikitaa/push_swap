@@ -6,7 +6,7 @@
 /*   By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 18:16:24 by caugusta          #+#    #+#             */
-/*   Updated: 2021/06/24 01:43:11 by caugusta         ###   ########.fr       */
+/*   Updated: 2021/06/24 04:17:36 by caugusta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ t_list	*pars(char **argv)
 	while (argv[i])
 	{
 		a = ft_split(argv[i], ' ');
+		if (a == NULL)
+			exit_fun();
 		create_stack(a, &stack_a);
 		i++;
 	}
@@ -64,6 +66,8 @@ void	create_stack(char **a, t_list **stack_a)
 	while (a[j] != NULL)
 	{
 		tmp = malloc(sizeof(int));
+		if (tmp == NULL)
+			exit_fun();
 		*tmp = ft_atoi(a[j]);
 		new = ft_lstnew(tmp);
 		if (new == NULL)
@@ -77,7 +81,7 @@ void	create_stack(char **a, t_list **stack_a)
 int	check_list(t_list *stack_a)
 {
 	t_list	*tmp;
-	
+
 	while (stack_a)
 	{
 		if (stack_a->next)
@@ -86,7 +90,7 @@ int	check_list(t_list *stack_a)
 			return (1);
 		while (tmp)
 		{
-			if (stack_a->content == tmp->content)
+			if (*(int *)(stack_a->content) == *(int *)(tmp->content))
 				return (0);
 			tmp = tmp->next;
 		}
