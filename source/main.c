@@ -6,7 +6,7 @@
 /*   By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 19:44:50 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/06 16:35:03 by caugusta         ###   ########.fr       */
+/*   Updated: 2021/07/06 18:08:53 by caugusta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,11 @@ void	sort_numbers(t_stack **stack_a, t_stack **stack_b)
 	while (min_in_a(*stack_a, mid_i))
 	{
 		if ((*stack_a)->index <= mid_i)
+		{
 			pb(stack_a, stack_b);
+			if((*stack_a)->index > mid_i && (*stack_b)->index > mid_i / 2 + 1)
+				rr(stack_a, stack_b);
+		}
 		else
 			ra(stack_a);
 	}
@@ -104,6 +108,11 @@ void	sort_numbers(t_stack **stack_a, t_stack **stack_b)
 	max_i = (*stack_a)->index;
 	while ((*stack_b))
 		magic(stack_a, stack_b, mid_i);
+	printf("---stack_a\n");
+	print_stack(*stack_a);
+	printf("---stack_b\n");
+	print_stack(*stack_b);
+	exit (0);
 	while ((*stack_a)->index != max_i)
 		ra(stack_a);
 	if (check_sort(*stack_a) == 0)
@@ -216,6 +225,12 @@ void	magic2(t_stack **a, t_stack **b, int mid_i)
 	int	len;
 
 	len = stack_size(*b);
+	if (len == 2)
+	{
+		if ((*b)->index < (*b)->next->index)
+			sb(b);
+		pa(a, b);
+	}
 	if (find_max_i(*b) < len / 2)
 	{
 		i = find_max_i(*b);
@@ -258,7 +273,7 @@ void	another_magic(t_stack **stack_a, t_stack **stack_b)
 	mid_i = max_index(*stack_b) / 2 + 1;
 	max_i = (*stack_a)->index;
 	while ((*stack_b))
-		magic3(stack_a, stack_b, mid_i);
+		magic2(stack_a, stack_b, mid_i);
 	while ((*stack_a)->index != max_i)
 		ra(stack_a);
 	if (check_sort(*stack_a) == 0)
@@ -276,30 +291,29 @@ int	min_in_a(t_stack *a, int mid_i)
 	return (0);
 }
 
-void	magic3(t_stack **a, t_stack **b, int mid_i)
-{
-	int	len;
-	int	i;
+// void	what_better(t_stack **a, t_stack **b, int mid_i)
+// {
+// 	int	len;
+// 	int	i;
+// 	int	j;
+// 	int	k;
+// 	t_stack *tmp;
 
-	len = stack_size(*b);
-	if (len == 2)
-	{
-		if ((*b)->index < (*b)->next->index)
-			sb(b);
-		pa(a, b);
-	}
-	if (find_max_i(*b) < len / 2)
-	{
-		i = find_max_i(*b);
-		while (i--)
-			rb(b);
-		pa(a, b);
-	}
-	else
-	{
-		i = len - find_max_i(*b);
-		while (i--)
-			rrb_or_sb(b);
-		pa(a, b);
-	}
-}
+// 	len = stack_size(*a);
+// 	i = 0;
+// 	j = 0;
+// 	k = 0;
+// 	while (i < len / 2 + 1)
+// 	{
+// 		if ((*a)->index <= mid_i)
+// 			j++;
+// 	}
+// 	if ((*a)->index <= mid_i)
+// 	{
+// 		pb(a, b);
+// 		if((*a)->index > mid_i && (*b)->index > mid_i / 2 + 1)
+// 			rr(a, b);
+// 	}
+// 	else
+// 		ra(a);
+// }
