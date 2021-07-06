@@ -6,7 +6,7 @@
 /*   By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 19:44:50 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/06 15:13:23 by caugusta         ###   ########.fr       */
+/*   Updated: 2021/07/06 16:35:03 by caugusta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,10 @@ void	sort_numbers(t_stack **stack_a, t_stack **stack_b)
 {
 	int	mid_i;
 	int	max_i;
-	int	break_point;
 
 	max_i = max_index(*stack_a);
-	mid_i = max_i / 2 + 1;
-	while (stack_size(*stack_a) >= mid_i)
+	mid_i = max_i / 2;
+	while (min_in_a(*stack_a, mid_i))
 	{
 		if ((*stack_a)->index <= mid_i)
 			pb(stack_a, stack_b);
@@ -188,9 +187,9 @@ void	magic(t_stack **a, t_stack **b, int mid_i)
 	int	i;
 
 	len = stack_size(*b);
-	if (len - find_min_i(*b) < len - find_max_i(*b))
+	if (len - find_min_i(*b) <= len - find_max_i(*b))
 	{
-		if (find_min_i(*b) < len / 2)
+		if (find_min_i(*b) <= len / 2)
 		{
 			i = find_min_i(*b);
 			while (i--)
@@ -208,21 +207,21 @@ void	magic(t_stack **a, t_stack **b, int mid_i)
 		}
 	}
 	else
-		magic2(a, b, len, mid_i);
+		magic2(a, b, mid_i);
 }
 
-void	magic2(t_stack **a, t_stack **b, int len, int mid_i)
+void	magic2(t_stack **a, t_stack **b, int mid_i)
 {
 	int	i;
+	int	len;
 
+	len = stack_size(*b);
 	if (find_max_i(*b) < len / 2)
 	{
 		i = find_max_i(*b);
 		while (i--)
 			rb(b);
 		pa(a, b);
-		if ((*a)->index < mid_i)
-			ra(a);
 	}
 	else
 	{
@@ -230,8 +229,6 @@ void	magic2(t_stack **a, t_stack **b, int len, int mid_i)
 		while (i--)
 			rrb_or_sb(b);
 		pa(a, b);
-		if ((*a)->index < mid_i)
-			ra(a);
 	}
 }
 
@@ -247,7 +244,7 @@ void	another_magic(t_stack **stack_a, t_stack **stack_b)
 {
 	int	mid_i;
 	int	max_i;
-	int	break_point;
+	int	len;
 
 	max_i = max_index(*stack_a);
 	mid_i = max_i / 2 + 1;
@@ -261,9 +258,48 @@ void	another_magic(t_stack **stack_a, t_stack **stack_b)
 	mid_i = max_index(*stack_b) / 2 + 1;
 	max_i = (*stack_a)->index;
 	while ((*stack_b))
-		magic(stack_a, stack_b, mid_i);
+		magic3(stack_a, stack_b, mid_i);
 	while ((*stack_a)->index != max_i)
 		ra(stack_a);
 	if (check_sort(*stack_a) == 0)
 		return ;
+}
+
+int	min_in_a(t_stack *a, int mid_i)
+{
+	while (a)
+	{
+		if (a->index <= mid_i)
+			return (1);
+		a = a->next;
+	}
+	return (0);
+}
+
+void	magic3(t_stack **a, t_stack **b, int mid_i)
+{
+	int	len;
+	int	i;
+
+	len = stack_size(*b);
+	if (len == 2)
+	{
+		if ((*b)->index < (*b)->next->index)
+			sb(b);
+		pa(a, b);
+	}
+	if (find_max_i(*b) < len / 2)
+	{
+		i = find_max_i(*b);
+		while (i--)
+			rb(b);
+		pa(a, b);
+	}
+	else
+	{
+		i = len - find_max_i(*b);
+		while (i--)
+			rrb_or_sb(b);
+		pa(a, b);
+	}
 }

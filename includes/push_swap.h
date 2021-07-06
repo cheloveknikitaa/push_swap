@@ -46,8 +46,10 @@ int		find_max_i(t_stack *stack);
 int		find_min_i(t_stack *stack);
 int		min_index(t_stack *stack);
 void	magic(t_stack **a, t_stack **b, int mid_i);
-void	magic2(t_stack **a, t_stack **b, int len, int mid_i);
+void	magic2(t_stack **a, t_stack **b, int mid_i);
+void	magic3(t_stack **a, t_stack **b, int mid_i);
 void	rrb_or_sb(t_stack **b);
 void	another_magic(t_stack **stack_a, t_stack **stack_b);
+int		min_in_a(t_stack *a, int mid_i);
 
 #endif
