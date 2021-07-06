@@ -6,7 +6,7 @@
 /*   By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 19:44:50 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/06 08:38:39 by caugusta         ###   ########.fr       */
+/*   Updated: 2021/07/06 11:15:45 by caugusta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,28 @@ int	main(int argc, char **argv)
 	t_stack	*stack_b;
 
 	pars(argv, &stack_a);
-	if (stack_size(stack_a) == 3)
+	if (stack_size(stack_a) <= 3)
 		sort_3numbers(&stack_a);
-	if (stack_size(stack_a) == 5)
+	else if (stack_size(stack_a) == 5)
 		sort_5numbers(&stack_a, &stack_b);
 	else
 		sort_numbers(&stack_a, &stack_b);
-	// printf("---stack_a\n");
-	// print_stack(stack_a);
-	// printf("---stack_b\n");
-	// print_stack(stack_b);
+	printf("---stack_a\n");
+	print_stack(stack_a);
+	printf("---stack_b\n");
+	print_stack(stack_b);
 }
 
 void	sort_3numbers(t_stack **stack)
 {
 	t_stack	*last;
 
+	if (stack_size(*stack) == 2)
+	{
+		if ((*stack)->content > (*stack)->next->content)
+			sa(stack);
+		return;
+	}
 	last = stack_last(*stack);
 	if ((*stack)->content > (*stack)->next->content && \
 		(*stack)->content > last->content)
@@ -92,24 +98,17 @@ void	sort_numbers(t_stack **stack_a, t_stack **stack_b)
 	i = 0;
 	while (stack_size(*stack_a) > mid_i)
 	{
-		if ((*stack_a)->index <= mid_i / 2 && stack_size(*stack_b) < mid_i)
-		{
-			pb(stack_a, stack_b);
-			i++;
-		}
-		else
-			ra(stack_a);
-		if (i == 2)
-		{
-			i = 0;
-			if ((*stack_a)->content > (*stack_a)->next->content && \
-			(*stack_b)->content < (*stack_b)->next->content)
-				ss(stack_a, stack_b);
-			if ((*stack_b)->content < (*stack_b)->next->content)
-				sb(stack_b);
-			if ((*stack_a)->content > (*stack_a)->next->content)
-				sa(stack_a);
-		}
+		pb(stack_a, stack_b);
+		pb(stack_a, stack_b);
+		if ((*stack_a)->content > (*stack_a)->next->content && \
+		(*stack_b)->content < (*stack_b)->next->content)
+			ss(stack_a, stack_b);
+		if ((*stack_b)->content < (*stack_b)->next->content)
+			sb(stack_b);
+		if ((*stack_a)->content > (*stack_a)->next->content)
+			sa(stack_a);
+		ra(stack_a);
+		ra(stack_a);
 	}
 	printf("---stack_a\n");
 	print_stack(*stack_a);
@@ -120,7 +119,6 @@ void	sort_numbers(t_stack **stack_a, t_stack **stack_b)
 	// 	last = stack_last(*stack_a);
 	// 	if (last->content > (*stack_b)->content)
 			
-	// }
 }
 
 int		max_index(t_stack *stack)
