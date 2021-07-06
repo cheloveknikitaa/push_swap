@@ -6,7 +6,7 @@
 /*   By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 18:16:24 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/06 03:20:48 by caugusta         ###   ########.fr       */
+/*   Updated: 2021/07/06 05:20:09 by caugusta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,12 @@ void	pars(char **argv, t_stack **stack_a)
 		create_stack(a, stack_a);
 		i++;
 	}
+	if (stack_size(*stack_a) < 2)
+		exit_fun();
 	if (check_list(*stack_a) == 0)
 		exit_fun();
+	if (check_sort(*stack_a) == 0)
+		exit (0);
 }
 
 int		check_valid(char **argv)
@@ -73,7 +77,7 @@ void	create_stack(char **a, t_stack **stack_a)
 	cs_2d_arr(a, j);
 }
 
-int	check_list(t_stack *stack_a)
+int		check_list(t_stack *stack_a)
 {
 	t_stack	*tmp;
 	t_stack	*keep;
@@ -112,4 +116,21 @@ void	cs_2d_arr(char **s, int count)
 	}
 	free (s);
 	s = NULL;
+}
+
+int		check_sort(t_stack *stack)
+{
+	while (stack)
+	{
+		if (stack->next)
+		{
+			if (stack->index < stack->next->index)
+				stack = stack->next;
+			else
+				return (1);
+		}
+		else
+			return (0);
+	}
+	return (0);
 }

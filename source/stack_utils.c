@@ -6,7 +6,7 @@
 /*   By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 01:16:08 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/06 02:59:35 by caugusta         ###   ########.fr       */
+/*   Updated: 2021/07/06 05:43:58 by caugusta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,22 @@ t_stack	*stack_new(int content)
 	if (new == NULL)
 		return (NULL);
 	new->content = content;
-	new->index = 0;
+	new->index = 1;
 	new->next = NULL;
 	return (new);
+}
+
+int	stack_size(t_stack *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
 }
 
 void	print_stack(t_stack *stack)
@@ -66,3 +79,8 @@ void	print_stack(t_stack *stack)
 		stack = stack->next;
 	}
 }
+
+	// printf("---stack_a\n");
+	// print_stack(stack_a);
+	// printf("---stack_b\n");
+	// print_stack(stack_b);
