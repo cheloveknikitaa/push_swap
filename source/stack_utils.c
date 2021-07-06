@@ -6,7 +6,7 @@
 /*   By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 01:16:08 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/06 05:43:58 by caugusta         ###   ########.fr       */
+/*   Updated: 2021/07/07 00:55:58 by caugusta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,12 @@ t_stack	*stack_new(int content)
 {
 	t_stack		*new;
 
-	new = malloc(sizeof(t_stack *));
+	new = malloc(sizeof(t_stack));
 	if (new == NULL)
 		return (NULL);
 	new->content = content;
 	new->index = 1;
+	new->actions = 0;
 	new->next = NULL;
 	return (new);
 }
@@ -75,7 +76,7 @@ void	print_stack(t_stack *stack)
 {
 	while (stack)
 	{
-		printf("chislo %d ego index %d\n", stack->content, stack->index);
+		printf("chislo %d ego index %d ego actions %d\n", stack->content, stack->index, stack->actions);
 		stack = stack->next;
 	}
 }

@@ -4,9 +4,10 @@
 
 typedef struct s_stack
 {
+	struct s_stack	*next;
 	int				content;
 	int				index;
-	struct s_stack	*next;
+	int				actions;
 
 }					t_stack;
 
@@ -41,14 +42,13 @@ void	print_stack(t_stack *stck);
 void	sort_3numbers(t_stack **stack_a);
 void	sort_5numbers(t_stack **stack_a, t_stack **stack_b);
 void	sort_numbers(t_stack **stack_a, t_stack **stack_b);
-int		max_index(t_stack *stack);
-int		find_max_i(t_stack *stack);
-int		find_min_i(t_stack *stack);
-int		min_index(t_stack *stack);
-void	magic(t_stack **a, t_stack **b, int mid_i);
-void	magic2(t_stack **a, t_stack **b, int mid_i);
-void	rrb_or_sb(t_stack **b);
-void	another_magic(t_stack **stack_a, t_stack **stack_b);
-int		min_in_a(t_stack *a, int mid_i);
+void	do_action(t_stack **stack_a, t_stack **stack_b);
+void	do_action_part2(t_stack **stack_a, t_stack **stack_b, int code, int action);
+int	find_min_action(t_stack *b, int	*code);
+void	free_all_action(t_stack *a, t_stack *b);
+void	magic(t_stack *a, t_stack *b);
+void	angel_dust(t_stack *a, t_stack *b, int i);
+void	check_dubl(t_stack *a, t_stack *b);
+
 
 #endif

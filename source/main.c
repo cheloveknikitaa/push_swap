@@ -6,7 +6,7 @@
 /*   By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 19:44:50 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/06 18:08:53 by caugusta         ###   ########.fr       */
+/*   Updated: 2021/07/07 02:06:52 by caugusta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,232 +88,190 @@ void	sort_5numbers(t_stack **stack_a, t_stack **stack_b)
 
 void	sort_numbers(t_stack **stack_a, t_stack **stack_b)
 {
-	int	mid_i;
-	int	max_i;
-
-	max_i = max_index(*stack_a);
-	mid_i = max_i / 2;
-	while (min_in_a(*stack_a, mid_i))
+	while (stack_size(*stack_a) > 5)
+		pb(stack_a, stack_b);
+	sort_5numbers(stack_a, stack_b);
+		printf("============\n");
+		printf("---stack_a\n");
+		print_stack(*stack_a);
+		printf("---stack_b\n");
+		print_stack(*stack_b);
+		printf("============\n");
+	while (stack_size(*stack_b) >= 2)
 	{
-		if ((*stack_a)->index <= mid_i)
+		magic(*stack_a, *stack_b);
+		printf("============\n");
+		printf("---stack_a\n");
+		print_stack(*stack_a);
+		printf("---stack_b\n");
+		print_stack(*stack_b);
+		printf("============\n");
+		do_action(stack_a, stack_b);
+		free_all_action(*stack_a, *stack_b);
+	}
+	
+}
+
+void	do_action(t_stack **stack_a, t_stack **stack_b)
+{
+	int	code;
+	int	action;
+
+	action = find_min_action(*stack_b, &code);
+	if (code == 0)
+	{
+		while ((*stack_b)->actions != action)
+			rb(stack_b);
+	}
+	if (code == 1)
+	{
+		while ((*stack_b)->actions != action)
+			rrb(stack_b);
+	}
+	action = find_min_action(*stack_a, &code);
+	// check_dubl(*stack_a, *stack_b);
+	do_action_part2(stack_a, stack_b, code, action);
+}
+
+void	do_action_part2(t_stack **stack_a, t_stack **stack_b, int code, int action)
+{
+	int	i;
+
+	i = 0;
+	if (code == 0)
+	{
+		while ((*stack_a)->actions != action)
 		{
-			pb(stack_a, stack_b);
-			if((*stack_a)->index > mid_i && (*stack_b)->index > mid_i / 2 + 1)
-				rr(stack_a, stack_b);
+			ra(stack_a);
+			i++;
 		}
-		else
+		pa(stack_a, stack_b);
+		while (i--)
+			rra(stack_a);
+	}
+	if (code == 1)
+	{
+		while ((*stack_a)->actions != action && (*stack_a)->next)
+		{
+			rra(stack_a);
+			i++;
+		}
+		pa(stack_a, stack_b);
+		i++;
+		while (i--)
 			ra(stack_a);
 	}
-	mid_i = max_index(*stack_b) / 2 + 1;
-	max_i = (*stack_a)->index;
-	while ((*stack_b))
-		magic(stack_a, stack_b, mid_i);
-	printf("---stack_a\n");
-	print_stack(*stack_a);
-	printf("---stack_b\n");
-	print_stack(*stack_b);
-	exit (0);
-	while ((*stack_a)->index != max_i)
-		ra(stack_a);
-	if (check_sort(*stack_a) == 0)
-		return ;
-	another_magic(stack_a, stack_b);
 }
 
-int		find_max_i(t_stack *stack)
-{
-	int	max;
-	int	i;
-
-	i = 0;
-	max = max_index(stack);
-	while (stack)
-	{
-		if (stack->index == max)
-		{
-			if (i == stack_size(stack))
-				i--;
-			return (i);
-		}
-		i++;
-		stack = stack->next;
-	}
-	return (0);
-}
-
-int		find_min_i(t_stack *stack)
-{
-	int	min;
-	int	i;
-
-	i = 0;
-	min = min_index(stack);
-	while (stack)
-	{
-		if (stack->index == min)
-		{
-			if (i == stack_size(stack))
-				i--;
-			return (i);
-		}
-		i++;
-		stack = stack->next;
-	}
-	return (0);
-}
-
-int		max_index(t_stack *stack)
+int	find_min_action(t_stack *b, int	*code)
 {
 	int	i;
+	int	j;
+	int	size;
 
-	i = 0;
-	while (stack)
+	i = 999999;
+	size = stack_size(b);
+	while (b)
 	{
-		if (stack->index > i)
-			i = stack->index;
-		stack = stack->next;
+		if (b->actions < i && b->actions != 0)
+			i = b->actions;
+		b = b->next;
+		j++;
 	}
+	if (j <= size / 2)
+		*code = 0;
+	else
+		*code = 1;
 	return (i);
 }
 
-int		min_index(t_stack *stack)
-{
-	int	i;
-
-	i = stack->index;
-	while (stack)
-	{
-		if (stack->index < i)
-			i = stack->index;
-		stack = stack->next;
-	}
-	return (i);
-}
-
-void	magic(t_stack **a, t_stack **b, int mid_i)
-{
-	int	len;
-	int	i;
-
-	len = stack_size(*b);
-	if (len - find_min_i(*b) <= len - find_max_i(*b))
-	{
-		if (find_min_i(*b) <= len / 2)
-		{
-			i = find_min_i(*b);
-			while (i--)
-				rb(b);
-			pa(a, b);
-			ra(a);
-		}
-		else
-		{
-			i = len - find_min_i(*b);
-			while (i--)
-				rrb_or_sb(b);
-			pa(a, b);
-			ra(a);
-		}
-	}
-	else
-		magic2(a, b, mid_i);
-}
-
-void	magic2(t_stack **a, t_stack **b, int mid_i)
-{
-	int	i;
-	int	len;
-
-	len = stack_size(*b);
-	if (len == 2)
-	{
-		if ((*b)->index < (*b)->next->index)
-			sb(b);
-		pa(a, b);
-	}
-	if (find_max_i(*b) < len / 2)
-	{
-		i = find_max_i(*b);
-		while (i--)
-			rb(b);
-		pa(a, b);
-	}
-	else
-	{
-		i = len - find_max_i(*b);
-		while (i--)
-			rrb_or_sb(b);
-		pa(a, b);
-	}
-}
-
-void	rrb_or_sb(t_stack **b)
-{
-	if (stack_size(*b) <= 2)
-		sb(b);
-	else
-		rrb(b);
-}
-
-void	another_magic(t_stack **stack_a, t_stack **stack_b)
-{
-	int	mid_i;
-	int	max_i;
-	int	len;
-
-	max_i = max_index(*stack_a);
-	mid_i = max_i / 2 + 1;
-	while (stack_size(*stack_a) >= mid_i)
-	{
-		if ((*stack_a)->index >= mid_i)
-			pb(stack_a, stack_b);
-		else
-			ra(stack_a);
-	}
-	mid_i = max_index(*stack_b) / 2 + 1;
-	max_i = (*stack_a)->index;
-	while ((*stack_b))
-		magic2(stack_a, stack_b, mid_i);
-	while ((*stack_a)->index != max_i)
-		ra(stack_a);
-	if (check_sort(*stack_a) == 0)
-		return ;
-}
-
-int	min_in_a(t_stack *a, int mid_i)
+void	free_all_action(t_stack *a, t_stack *b)
 {
 	while (a)
 	{
-		if (a->index <= mid_i)
-			return (1);
+		a->actions = 0;
 		a = a->next;
 	}
-	return (0);
+	while (b)
+	{
+		b->actions = 0;
+		b = b->next;
+	}
 }
 
-// void	what_better(t_stack **a, t_stack **b, int mid_i)
-// {
-// 	int	len;
-// 	int	i;
-// 	int	j;
-// 	int	k;
-// 	t_stack *tmp;
+void	magic(t_stack *a, t_stack *b)
+{
+	int	i;
+	int	j;
 
-// 	len = stack_size(*a);
-// 	i = 0;
-// 	j = 0;
-// 	k = 0;
-// 	while (i < len / 2 + 1)
-// 	{
-// 		if ((*a)->index <= mid_i)
-// 			j++;
-// 	}
-// 	if ((*a)->index <= mid_i)
-// 	{
-// 		pb(a, b);
-// 		if((*a)->index > mid_i && (*b)->index > mid_i / 2 + 1)
-// 			rr(a, b);
-// 	}
-// 	else
-// 		ra(a);
-// }
+	i = 0;
+	j = 1;
+	while (b)
+	{
+		if (b->actions == 0)
+			angel_dust(a, b, i);
+		i += j;
+		b = b->next;
+		if (i > stack_size(b) / 2)
+		{
+			i = stack_size(b) - i;
+			j = -j;
+		}
+	}
+}
+
+void	angel_dust(t_stack *a, t_stack *b, int i)
+{
+	while(a)
+	{
+		if (a->index == b->index - 1 && a->next)
+		{
+			if (a->next->index == b->index + 1)
+				b->actions = i;
+		}
+		else if (a->index == b->index - 1 && !a->next)
+			b->actions = i;
+		if (b->actions != 0)
+		{
+			a->actions = 1;
+			return	;
+		}
+		i++;
+		a = a->next;
+	}
+}
+
+void	check_dubl(t_stack *a, t_stack *b)
+{
+	int	i;
+	int	j;
+	int	k;
+	t_stack	*tmp;
+
+	j = 0;
+	k = 0;
+	i = find_min_action(b, &k);
+	while (a)
+	{
+		if (a->actions == 1)
+		{
+			k++;
+			if (k > 1)
+				a->actions = 10000;
+			else
+				tmp = a;
+		}
+		a = a->next;
+	}
+	while (b)
+	{
+		if (b->actions == i)
+		{
+			j++;
+			if (b->index - tmp->index != 1)
+				b->actions = 10000;
+		}
+		b = b->next;
+	}
+}
+
