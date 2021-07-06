@@ -6,7 +6,7 @@
 /*   By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 18:16:24 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/06 05:20:09 by caugusta         ###   ########.fr       */
+/*   Updated: 2021/07/06 14:17:44 by caugusta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,11 @@ void	create_stack(char **a, t_stack **stack_a)
 {
 	int		j;
 	t_stack	*new;
-	int		tmp;
 
 	j = 0;
 	while (a[j] != NULL)
 	{
-		tmp = ft_atoi(a[j]);
-		new = stack_new(tmp);
+		new = stack_new(ft_atoi(a[j]));
 		if (new == NULL)
 			exit_fun();
 		stack_add_back(stack_a, new);

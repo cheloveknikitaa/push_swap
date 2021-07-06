@@ -6,7 +6,7 @@
 /*   By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 19:44:50 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/06 11:15:45 by caugusta         ###   ########.fr       */
+/*   Updated: 2021/07/06 15:13:23 by caugusta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,35 +90,68 @@ void	sort_numbers(t_stack **stack_a, t_stack **stack_b)
 {
 	int	mid_i;
 	int	max_i;
-	int	i;
-	t_stack *last;
+	int	break_point;
 
 	max_i = max_index(*stack_a);
-	mid_i = max_i / 2;
-	i = 0;
-	while (stack_size(*stack_a) > mid_i)
+	mid_i = max_i / 2 + 1;
+	while (stack_size(*stack_a) >= mid_i)
 	{
-		pb(stack_a, stack_b);
-		pb(stack_a, stack_b);
-		if ((*stack_a)->content > (*stack_a)->next->content && \
-		(*stack_b)->content < (*stack_b)->next->content)
-			ss(stack_a, stack_b);
-		if ((*stack_b)->content < (*stack_b)->next->content)
-			sb(stack_b);
-		if ((*stack_a)->content > (*stack_a)->next->content)
-			sa(stack_a);
-		ra(stack_a);
-		ra(stack_a);
+		if ((*stack_a)->index <= mid_i)
+			pb(stack_a, stack_b);
+		else
+			ra(stack_a);
 	}
-	printf("---stack_a\n");
-	print_stack(*stack_a);
-	printf("---stack_b\n");
-	print_stack(*stack_b);
-	// while (stack_size(*stack_a) != max_i)
-	// {
-	// 	last = stack_last(*stack_a);
-	// 	if (last->content > (*stack_b)->content)
-			
+	mid_i = max_index(*stack_b) / 2 + 1;
+	max_i = (*stack_a)->index;
+	while ((*stack_b))
+		magic(stack_a, stack_b, mid_i);
+	while ((*stack_a)->index != max_i)
+		ra(stack_a);
+	if (check_sort(*stack_a) == 0)
+		return ;
+	another_magic(stack_a, stack_b);
+}
+
+int		find_max_i(t_stack *stack)
+{
+	int	max;
+	int	i;
+
+	i = 0;
+	max = max_index(stack);
+	while (stack)
+	{
+		if (stack->index == max)
+		{
+			if (i == stack_size(stack))
+				i--;
+			return (i);
+		}
+		i++;
+		stack = stack->next;
+	}
+	return (0);
+}
+
+int		find_min_i(t_stack *stack)
+{
+	int	min;
+	int	i;
+
+	i = 0;
+	min = min_index(stack);
+	while (stack)
+	{
+		if (stack->index == min)
+		{
+			if (i == stack_size(stack))
+				i--;
+			return (i);
+		}
+		i++;
+		stack = stack->next;
+	}
+	return (0);
 }
 
 int		max_index(t_stack *stack)
@@ -133,4 +166,104 @@ int		max_index(t_stack *stack)
 		stack = stack->next;
 	}
 	return (i);
+}
+
+int		min_index(t_stack *stack)
+{
+	int	i;
+
+	i = stack->index;
+	while (stack)
+	{
+		if (stack->index < i)
+			i = stack->index;
+		stack = stack->next;
+	}
+	return (i);
+}
+
+void	magic(t_stack **a, t_stack **b, int mid_i)
+{
+	int	len;
+	int	i;
+
+	len = stack_size(*b);
+	if (len - find_min_i(*b) < len - find_max_i(*b))
+	{
+		if (find_min_i(*b) < len / 2)
+		{
+			i = find_min_i(*b);
+			while (i--)
+				rb(b);
+			pa(a, b);
+			ra(a);
+		}
+		else
+		{
+			i = len - find_min_i(*b);
+			while (i--)
+				rrb_or_sb(b);
+			pa(a, b);
+			ra(a);
+		}
+	}
+	else
+		magic2(a, b, len, mid_i);
+}
+
+void	magic2(t_stack **a, t_stack **b, int len, int mid_i)
+{
+	int	i;
+
+	if (find_max_i(*b) < len / 2)
+	{
+		i = find_max_i(*b);
+		while (i--)
+			rb(b);
+		pa(a, b);
+		if ((*a)->index < mid_i)
+			ra(a);
+	}
+	else
+	{
+		i = len - find_max_i(*b);
+		while (i--)
+			rrb_or_sb(b);
+		pa(a, b);
+		if ((*a)->index < mid_i)
+			ra(a);
+	}
+}
+
+void	rrb_or_sb(t_stack **b)
+{
+	if (stack_size(*b) <= 2)
+		sb(b);
+	else
+		rrb(b);
+}
+
+void	another_magic(t_stack **stack_a, t_stack **stack_b)
+{
+	int	mid_i;
+	int	max_i;
+	int	break_point;
+
+	max_i = max_index(*stack_a);
+	mid_i = max_i / 2 + 1;
+	while (stack_size(*stack_a) >= mid_i)
+	{
+		if ((*stack_a)->index >= mid_i)
+			pb(stack_a, stack_b);
+		else
+			ra(stack_a);
+	}
+	mid_i = max_index(*stack_b) / 2 + 1;
+	max_i = (*stack_a)->index;
+	while ((*stack_b))
+		magic(stack_a, stack_b, mid_i);
+	while ((*stack_a)->index != max_i)
+		ra(stack_a);
+	if (check_sort(*stack_a) == 0)
+		return ;
 }
