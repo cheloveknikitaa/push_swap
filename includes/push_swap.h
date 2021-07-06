@@ -38,6 +38,9 @@ t_stack	*stack_new(int content);
 int		stack_size(t_stack *lst);
 void	print_stack(t_stack *stck);
 
-void	sort_3numbers(t_stack **stack_a, t_stack **stack_b);
+void	sort_3numbers(t_stack **stack_a);
+void	sort_5numbers(t_stack **stack_a, t_stack **stack_b);
+void	sort_numbers(t_stack **stack_a, t_stack **stack_b);
+int		max_index(t_stack *stack);
 
 #endif

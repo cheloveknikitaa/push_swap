@@ -6,7 +6,7 @@
 /*   By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 20:15:27 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/06 04:56:11 by caugusta         ###   ########.fr       */
+/*   Updated: 2021/07/06 07:26:52 by caugusta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,30 @@ void	rra(t_stack **stack)
 
 void	rrb(t_stack **stack)
 {
-	rra(stack);
+	t_stack *prelast;
+
+	prelast = *stack;
+	while (prelast->next->next != NULL)
+		prelast = prelast->next;
+	stack_add_front(stack, stack_last(*stack));
+	prelast->next = NULL;
 	write(1, "rrb\n", 4);
 }
 
 void	rrr(t_stack **stack_a, t_stack **stack_b)
 {
-	rra(stack_a);
-	rrb(stack_b);
+	t_stack *prelast_a;
+	t_stack *prelast_b;
+
+	prelast_a = *stack_a;
+	while (prelast_a->next->next != NULL)
+		prelast_a = prelast_a->next;
+	stack_add_front(stack_a, stack_last(*stack_a));
+	prelast_a->next = NULL;
+	prelast_b = *stack_b;
+	while (prelast_b->next->next != NULL)
+		prelast_b = prelast_b->next;
+	stack_add_front(stack_b, stack_last(*stack_b));
+	prelast_b->next = NULL;
 	write(1, "rrr\n", 4);
 }
