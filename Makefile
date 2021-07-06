@@ -6,7 +6,7 @@
 #    By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/10 22:20:54 by caugusta          #+#    #+#              #
-#    Updated: 2021/06/24 06:10:47 by caugusta         ###   ########.fr        #
+#    Updated: 2021/07/06 01:18:55 by caugusta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CFLAGS				= #-Wall -Wextra -Werror
 
 OBJ_DIR				= object/
 SOURCE_DIR			= source/
-SOURCE				= push_swap.c	parser.c
+SOURCE				= push_swap.c	parser.c	stack_utils.c
 
 LIBFT				= libft/$(LIBFT_NAME)
 LIBFT_DIR			= libft/
@@ -35,10 +35,10 @@ sub_directory :
 	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)%.o : $(SOURCE_DIR)%.c
-	@$(CC) -c -MMD $(CFLAGS) -I includes $< -o $@
+	@$(CC) -g -c -MMD $(CFLAGS) -I includes $< -o $@
 
 $(NAME) : $(LIBFT) $(OBJ)
-	@$(CC) $(CFLAGS) $^ -o $@
+	@$(CC) -g $(CFLAGS) $^ -o $@
 
 $(LIBFT) :
 	@$(MAKE) -C $(LIBFT_DIR) --silent

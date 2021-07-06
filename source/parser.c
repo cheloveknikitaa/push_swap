@@ -6,18 +6,17 @@
 /*   By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 18:16:24 by caugusta          #+#    #+#             */
-/*   Updated: 2021/06/24 04:34:45 by caugusta         ###   ########.fr       */
+/*   Updated: 2021/07/06 03:20:48 by caugusta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_list	*pars(char **argv)
+void	pars(char **argv, t_stack **stack_a)
 {
 	int		i;
 	int		j;
 	char	**a;
-	t_list	*stack_a;
 
 	if (check_valid(argv) == 0)
 		exit_fun();
@@ -27,12 +26,11 @@ t_list	*pars(char **argv)
 		a = ft_split(argv[i], ' ');
 		if (a == NULL)
 			exit_fun();
-		create_stack(a, &stack_a);
+		create_stack(a, stack_a);
 		i++;
 	}
-	if (check_list(stack_a) == 0)
+	if (check_list(*stack_a) == 0)
 		exit_fun();
-	return (stack_a);
 }
 
 int		check_valid(char **argv)
@@ -56,42 +54,47 @@ int		check_valid(char **argv)
 	return (1);
 }
 
-void	create_stack(char **a, t_list **stack_a)
+void	create_stack(char **a, t_stack **stack_a)
 {
 	int		j;
-	t_list	*new;
-	int		*tmp;
+	t_stack	*new;
+	int		tmp;
 
 	j = 0;
 	while (a[j] != NULL)
 	{
-		tmp = malloc(sizeof(int));
-		if (tmp == NULL)
-			exit_fun();
-		*tmp = ft_atoi(a[j]);
-		new = ft_lstnew(tmp);
+		tmp = ft_atoi(a[j]);
+		new = stack_new(tmp);
 		if (new == NULL)
 			exit_fun();
-		ft_lstadd_back(stack_a, new);
+		stack_add_back(stack_a, new);
 		j++;
 	}
 	cs_2d_arr(a, j);
 }
 
-int	check_list(t_list *stack_a)
+int	check_list(t_stack *stack_a)
 {
-	t_list	*tmp;
+	t_stack	*tmp;
+	t_stack	*keep;
+	int		repeat;
 
+	keep = stack_a;
 	while (stack_a)
 	{
-		if (stack_a->next)
-			tmp = stack_a->next;
-		else
-			return (1);
+		repeat = 0;
+		tmp = keep;
 		while (tmp)
 		{
-			if (*(int *)(stack_a->content) == *(int *)(tmp->content))
-				return (0);
+			if (stack_a->content >= tmp->content)
+			{
+				if (stack_a->content == tmp->content)
+					repeat++;
+				else
+					stack_a->index++;
+				if (repeat > 1)
+					return (0);
+			}
 			tmp = tmp->next;
 		}
 		stack_a = stack_a->next;
