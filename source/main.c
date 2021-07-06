@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/18 20:01:24 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/06 03:18:26 by caugusta         ###   ########.fr       */
+/*   Created: 2021/05/18 19:44:50 by caugusta          #+#    #+#             */
+/*   Updated: 2021/07/06 03:07:51 by caugusta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	pa(t_stack *stack_a, t_stack *stack_b)
+void	exit_fun()
 {
-	if (stack_b == null)
-		return ;
-	stack_add_front(&stack_a, stack_b);
-	stack_b = stack_b->next;
+	write(1, "Error\n", 7);
+	exit (1);
 }
 
-void	pb(t_stack *stack_a, t_stack *stack_b)
+int	main(int argc, char **argv)
 {
-	if (stack_a == null)
-		return ;
-	stack_add_front(&stack_b, stack_a);
-	stack_a = stack_a->next;
+	t_stack	*stack_a;
+	t_stack	*stack_b;
+
+	pars(argv, &stack_a);
+	print_stack(stack_a);
 }

@@ -5,24 +5,55 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/18 19:44:50 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/06 03:07:51 by caugusta         ###   ########.fr       */
+/*   Created: 2021/05/18 20:01:24 by caugusta          #+#    #+#             */
+/*   Updated: 2021/07/06 03:24:37 by caugusta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	exit_fun()
+void	pa(t_stack *stack_a, t_stack *stack_b)
 {
-	write(1, "Error\n", 7);
-	exit (1);
+	if (stack_b == null)
+		return ;
+	stack_add_front(&stack_a, stack_b);
+	stack_b = stack_b->next;
 }
 
-int	main(int argc, char **argv)
+void	pb(t_stack *stack_a, t_stack *stack_b)
 {
-	t_stack	*stack_a;
-	t_stack	*stack_b;
+	if (stack_a == null)
+		return ;
+	stack_add_front(&stack_b, stack_a);
+	stack_a = stack_a->next;
+}
 
-	pars(argv, &stack_a);
-	print_stack(stack_a);
+void	sa(t_stack *stack)
+{
+	t_stack	*keeper;
+
+	if (stack == NULL || stack->next == NULL)
+		return ;
+	keeper = stack;
+	stack = stack->next;
+	keeper->next = stack->next;
+	stack->next = keeper;
+}
+
+void	sb(t_stack *stack)
+{
+	t_stack	*keeper;
+
+	if (stack == NULL || stack->next == NULL)
+		return ;
+	keeper = stack;
+	stack = stack->next;
+	keeper->next = stack->next;
+	stack->next = keeper;
+}
+
+void	ss(t_stack *stack_a, t_stack *stack_b)
+{
+	sa(stack_a);
+	sb(stack_b);
 }
