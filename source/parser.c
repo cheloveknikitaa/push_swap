@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikita <nikita@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 18:16:24 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/06 14:17:44 by caugusta         ###   ########.fr       */
+/*   Updated: 2021/07/09 23:47:54 by nikita           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	pars(char **argv, t_stack **stack_a)
 {
 	int		i;
-	int		j;
 	char	**a;
 
 	if (check_valid(argv) == 0)

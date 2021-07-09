@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+         #
+#    By: nikita <nikita@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/10 22:20:54 by caugusta          #+#    #+#              #
-#    Updated: 2021/07/06 03:44:23 by caugusta         ###   ########.fr        #
+#    Updated: 2021/07/10 00:01:59 by nikita           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME				= push_swap
 LIBFT_NAME			= libft.a
 
 CC					= gcc
-CFLAGS				= #-Wall -Wextra -Werror
+CFLAGS				= -Wall -Wextra -Werror -MMD -g
 
 OBJ_DIR				= object/
 SOURCE_DIR			= source/
@@ -24,25 +24,26 @@ LIBFT				= libft/$(LIBFT_NAME)
 LIBFT_DIR			= libft/
 
 OBJ					= $(addprefix $(OBJ_DIR), $(SOURCE:.c=.o))
-D_FILES				= $(wildcard $(OBJ_DIR)*.d)
+D_FILES				= $(wildcard $(OBJ_DIR)%.d)
 
 .PHONY : all sub_directory clean fclean re bonus
 
-all : sub_directory $(NAME)
+all : sub_directory $(LIBFT) $(NAME)
 	@echo COMPLETE
 
 sub_directory :
 	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)%.o : $(SOURCE_DIR)%.c
-	@$(CC) -g -c -MMD $(CFLAGS) -I includes $< -o $@
+	@$(CC) $(CFLAGS) -c -o $@ $< -I ./includes/
 
-$(NAME) : $(LIBFT) $(OBJ)
-	@$(CC) -g $(CFLAGS) $^ -o $@
+$(NAME) : $(OBJ) $(LIBFT)
+	@$(CC) $(CFLAGS) -o $@ $^ -I ./includes/
 
 $(LIBFT) :
 	@$(MAKE) -C $(LIBFT_DIR) --silent
 	@cp $(LIBFT_DIR)/libft.h ./includes
+	@cp $(LIBFT_DIR)/ft_printf/ft_printf.h ./includes
 	@echo LIBFT OK
 
 include $(D_FILES)
@@ -59,5 +60,6 @@ fclean : clean
 	@echo FCLEAN COMPLETE
 	@rm -rf $(NAME)
 	@rm -rf includes/libft.h
+	@rm -rf includes/ft_printf.h
 
 re : fclean all

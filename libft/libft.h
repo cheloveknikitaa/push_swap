@@ -1,20 +1,18 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/17 00:26:44 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/06 01:17:25 by caugusta         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10000
+# endif
+# ifndef FD_SIZE
+#  define FD_SIZE 10000
+# endif
+
+int		get_next_line(int fd, char **line);
+char	*ft_strjoin_gnl(char *s1, char *s2);
 
 typedef struct s_list
 {
@@ -23,6 +21,7 @@ typedef struct s_list
 }					t_list;
 
 int		ft_atoi(const char *str);
+double	ft_atof(char **line);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);

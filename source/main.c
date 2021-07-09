@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikita <nikita@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 19:44:50 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/07 02:06:52 by caugusta         ###   ########.fr       */
+/*   Updated: 2021/07/09 23:47:41 by nikita           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	main(int argc, char **argv)
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 
+	if (argc < 2)
+		return (0);
 	pars(argv, &stack_a);
 	if (stack_size(stack_a) <= 3)
 		sort_3numbers(&stack_a);
