@@ -1,6 +1,6 @@
-#include "ft_printf.h"
+#include "libft.h"
 
-int static	lennbr(unsigned int n)
+static int	lennbr(int n)
 {
 	int		i;
 
@@ -23,7 +23,7 @@ char	*ft_utoa(unsigned int n)
 	char	*arr;
 	int		i;
 
-	i = lennbr(n);
+	i = lennbr((int)n);
 	arr = (char *)malloc(sizeof(char) * (i + 1));
 	if (arr == NULL)
 		return (NULL);

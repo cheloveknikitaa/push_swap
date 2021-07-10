@@ -25,7 +25,7 @@ OBJ			= $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 D_FILES		= $(wildcard $(OBJ_DIR)*.d)
 
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -I .
 
 .PHONY : 	all sub_directory clean fclean re bonus
 
@@ -36,7 +36,7 @@ sub_directory :
 	@mkdir -p $(OBJ_DIR)/gnl
 
 $(OBJ_DIR)%.o : %.c
-	$(CC) -g -c -MMD $(FLAGS) $< -o $@
+	$(CC) -g -c -MMD $(CFLAGS) $< -o $@
 
 $(NAME) : $(OBJ)
 	ar rcs $(NAME) $?

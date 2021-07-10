@@ -6,7 +6,7 @@
 #    By: nikita <nikita@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/10 22:20:54 by caugusta          #+#    #+#              #
-#    Updated: 2021/07/10 00:01:59 by nikita           ###   ########.fr        #
+#    Updated: 2021/07/10 04:40:53 by nikita           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,6 @@ $(NAME) : $(OBJ) $(LIBFT)
 $(LIBFT) :
 	@$(MAKE) -C $(LIBFT_DIR) --silent
 	@cp $(LIBFT_DIR)/libft.h ./includes
-	@cp $(LIBFT_DIR)/ft_printf/ft_printf.h ./includes
 	@echo LIBFT OK
 
 include $(D_FILES)

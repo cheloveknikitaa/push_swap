@@ -6,7 +6,7 @@
 /*   By: nikita <nikita@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 19:44:50 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/09 23:47:41 by nikita           ###   ########.fr       */
+/*   Updated: 2021/07/10 04:19:45 by nikita           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int	main(int argc, char **argv)
 		sort_5numbers(&stack_a, &stack_b);
 	else
 		sort_numbers(&stack_a, &stack_b);
-	printf("---stack_a\n");
+	ft_printf("---stack_a\n");
 	print_stack(stack_a);
-	printf("---stack_b\n");
+	ft_printf("---stack_b\n");
 	print_stack(stack_b);
 }
 
@@ -48,7 +48,7 @@ void	sort_3numbers(t_stack **stack)
 	{
 		if ((*stack)->content > (*stack)->next->content)
 			sa(stack);
-		return;
+		return ;
 	}
 	last = stack_last(*stack);
 	if ((*stack)->content > (*stack)->next->content && \
@@ -95,21 +95,21 @@ void	sort_numbers(t_stack **stack_a, t_stack **stack_b)
 	while (stack_size(*stack_a) > 5)
 		pb(stack_a, stack_b);
 	sort_5numbers(stack_a, stack_b);
-		printf("============\n");
-		printf("---stack_a\n");
-		print_stack(*stack_a);
-		printf("---stack_b\n");
-		print_stack(*stack_b);
-		printf("============\n");
+	ft_printf("============\n");
+	ft_printf("---stack_a\n");
+	print_stack(*stack_a);
+	ft_printf("---stack_b\n");
+	print_stack(*stack_b);
+	ft_printf("============\n");
 	while (stack_size(*stack_b) >= 2)
 	{
 		magic(*stack_a, *stack_b);
-		printf("============\n");
-		printf("---stack_a\n");
+		ft_printf("============\n");
+		ft_printf("---stack_a\n");
 		print_stack(*stack_a);
-		printf("---stack_b\n");
+		ft_printf("---stack_b\n");
 		print_stack(*stack_b);
-		printf("============\n");
+		ft_printf("============\n");
 		do_action(stack_a, stack_b);
 		free_all_action(*stack_a, *stack_b);
 	}

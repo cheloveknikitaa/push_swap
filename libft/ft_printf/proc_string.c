@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "libft.h"
 
 static void	print_s(t_option *options, char *str);
 static void	print_s2(t_option *options, int i, char *str);

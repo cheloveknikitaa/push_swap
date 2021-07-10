@@ -1,12 +1,10 @@
-#include "ft_printf.h"
+#include "libft.h"
 
 void	proc_int(t_option *options, va_list ap)
 {
-	int		i;
 	int		num;
 	char	*number;
 
-	i = 0;
 	num = va_arg(ap, int);
 	if (options->precision == 0 && num == 0)
 	{

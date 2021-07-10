@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "libft.h"
 
 void	pars_flags(char *parsing, t_option *options, va_list ap)
 {

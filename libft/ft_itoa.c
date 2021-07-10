@@ -1,6 +1,6 @@
 #include "libft.h"
 
-int static	lennbr(int n)
+static int	lennbr(int n)
 {
 	int		i;
 

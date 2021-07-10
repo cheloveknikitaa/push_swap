@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "libft.h"
 
 static void	print_point(t_option *options, char *number);
 static void	print_point2(t_option *options, char *number);
@@ -79,10 +79,8 @@ static void	print_point3(t_option *options, char *number)
 void	proc_pointer(t_option *options, va_list ap)
 {
 	unsigned long		num;
-	int					i;
 	char				*number;
 
-	i = 0;
 	num = va_arg(ap, unsigned long);
 	if (options->precision == 0 && num == 0)
 	{

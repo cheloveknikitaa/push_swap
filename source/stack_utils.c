@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikita <nikita@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 01:16:08 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/07 00:55:58 by caugusta         ###   ########.fr       */
+/*   Updated: 2021/07/10 04:19:56 by nikita           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	print_stack(t_stack *stack)
 {
 	while (stack)
 	{
-		printf("chislo %d ego index %d ego actions %d\n", stack->content, stack->index, stack->actions);
+		ft_printf("chislo %d ego index %d ego actions %d\n", stack->content, stack->index, stack->actions);
 		stack = stack->next;
 	}
 }
