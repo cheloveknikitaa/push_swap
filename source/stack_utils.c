@@ -40,7 +40,7 @@ t_stack	*stack_last(t_stack *lst)
 {
 	if (lst == NULL)
 		return (NULL);
-	while (lst->next)
+	while (lst->next != NULL)
 		lst = lst->next;
 	return (lst);
 }

@@ -4,9 +4,9 @@
 
 typedef struct s_stack
 {
-	struct s_stack	*next;
 	int				content;
 	int				index;
+	struct s_stack	*next;
 	int				actions;
 
 }					t_stack;
