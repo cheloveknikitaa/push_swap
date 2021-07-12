@@ -6,7 +6,7 @@
 /*   By: nikita <nikita@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 01:16:08 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/10 04:19:56 by nikita           ###   ########.fr       */
+/*   Updated: 2021/07/12 04:04:23 by nikita           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,22 @@ t_stack	*stack_new(int content)
 	return (new);
 }
 
+t_stack	*stack_copy(t_stack *copy, t_stack *original)
+{
+	free(copy);
+	copy = NULL;
+	copy = malloc(sizeof(t_stack));
+	if (copy == NULL)
+		exit_fun();
+	copy->content = original->content;
+	copy->index = original->index;
+	copy->actions = original->actions;
+	copy->moves_in_a = original->moves_in_a;
+	copy->moves_in_b = original->moves_in_b;
+	copy->next = NULL;
+	return (copy);
+}
+
 int	stack_size(t_stack *lst)
 {
 	int	i;
@@ -76,9 +92,27 @@ void	print_stack(t_stack *stack)
 {
 	while (stack)
 	{
-		ft_printf("chislo %d ego index %d ego actions %d\n", stack->content, stack->index, stack->actions);
+		ft_printf("|| index %3d | actions %3d | move_a %3d | move_b %3d ||\n", \
+			stack->index, stack->actions, stack->moves_in_a, stack->moves_in_b);
 		stack = stack->next;
 	}
+}
+
+void	print_stacks(t_stack *a, t_stack *b, t_stack *target)
+{
+	ft_printf("=======================================================\n");
+	ft_printf("||%19.0s---stack_a---%19.0s||\n", NULL, NULL);
+	ft_printf("=======================================================\n");
+	print_stack(a);
+	ft_printf("=======================================================\n");
+	ft_printf("||%19.0s---target---%20.0s||\n", NULL, NULL);
+	ft_printf("=======================================================\n");
+	print_stack(target);
+	ft_printf("=======================================================\n");
+	ft_printf("||%19.0s---stack_b---%19.0s||\n", NULL, NULL);
+	ft_printf("=======================================================\n");
+	print_stack(b);
+	ft_printf("=======================================================\n");
 }
 
 	// printf("---stack_a\n");

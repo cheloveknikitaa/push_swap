@@ -6,13 +6,13 @@
 /*   By: nikita <nikita@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 19:44:50 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/10 04:19:45 by nikita           ###   ########.fr       */
+/*   Updated: 2021/07/12 05:53:01 by nikita           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	exit_fun()
+void	exit_fun(void)
 {
 	write(1, "Error\n", 7);
 	exit (1);
@@ -71,9 +71,14 @@ void	sort_3numbers(t_stack **stack)
 
 void	sort_5numbers(t_stack **stack_a, t_stack **stack_b)
 {
+	int	min1;
+	int	min2;
+
+	min1 = find_need_index(*stack_a, 0);
+	min2 = find_need_index(*stack_a, min1);
 	while (stack_size(*stack_a) > 3)
 	{
-		if ((*stack_a)->index <= 2)
+		if ((*stack_a)->index == min1 || (*stack_a)->index == min2)
 			pb(stack_a, stack_b);
 		else
 			ra(stack_a);
@@ -90,51 +95,142 @@ void	sort_5numbers(t_stack **stack_a, t_stack **stack_b)
 	pa(stack_a, stack_b);
 }
 
+int	find_need_index(t_stack *stack, int i)
+{
+	int	min;
+
+	min = 9999999;
+	while (stack)
+	{
+		if (stack->index < min && stack->index != i)
+			min = stack->index;
+		stack = stack->next;
+	}
+	return (min);
+}
+
 void	sort_numbers(t_stack **stack_a, t_stack **stack_b)
 {
-	while (stack_size(*stack_a) > 5)
-		pb(stack_a, stack_b);
-	sort_5numbers(stack_a, stack_b);
-	ft_printf("============\n");
-	ft_printf("---stack_a\n");
-	print_stack(*stack_a);
-	ft_printf("---stack_b\n");
-	print_stack(*stack_b);
-	ft_printf("============\n");
-	while (stack_size(*stack_b) >= 2)
+	t_stack	*target;
+	int		i;
+
+	i = 1;
+	while ((*stack_a)->actions != 1 && stack_size(*stack_a) > 5)
 	{
-		magic(*stack_a, *stack_b);
-		ft_printf("============\n");
-		ft_printf("---stack_a\n");
-		print_stack(*stack_a);
-		ft_printf("---stack_b\n");
-		print_stack(*stack_b);
-		ft_printf("============\n");
-		do_action(stack_a, stack_b);
+		if ((*stack_a)->index == i)
+		{
+			ra(stack_a);
+			i++;
+		}
+		else
+			pb(stack_a, stack_b);
+	}
+	if (i < 5)
+		sort_5numbers(stack_a, stack_b);
+	while (stack_size(*stack_b))
+	{
+		find_better_b(*stack_a, *stack_b);
+		target = check_finding_b(*stack_a, *stack_b);
+		do_action(stack_a, stack_b, target);
+		print_stacks(*stack_a, *stack_b, target);
 		free_all_action(*stack_a, *stack_b);
 	}
+	print_stacks(*stack_a, *stack_b, target);
+	// while ((*stack_a)->index != 1)
+	// 	ra(stack_a);
+	exit (0);
 	
 }
 
-void	do_action(t_stack **stack_a, t_stack **stack_b)
+void	do_action(t_stack **stack_a, t_stack **stack_b, t_stack *guide)
 {
-	int	code;
-	int	action;
+	int			i;
+	static int	j;
+	t_stack		*target;
 
-	action = find_min_action(*stack_b, &code);
-	if (code == 0)
+	i = 0;
+	if (guide->moves_in_b < 0)
 	{
-		while ((*stack_b)->actions != action)
-			rb(stack_b);
-	}
-	if (code == 1)
-	{
-		while ((*stack_b)->actions != action)
+		guide->moves_in_b = -guide->moves_in_b;
+		while (guide->moves_in_b > 0 && guide->index != (*stack_b)->content)
+		{
 			rrb(stack_b);
+			guide->moves_in_b--;
+		}
 	}
-	action = find_min_action(*stack_a, &code);
-	// check_dubl(*stack_a, *stack_b);
-	do_action_part2(stack_a, stack_b, code, action);
+	else
+	{
+		while (guide->moves_in_b > 0)
+		{
+			rb(stack_b);
+			guide->moves_in_b--;
+		}
+	}
+	if (guide->moves_in_a < 0)
+	{
+		guide->moves_in_a = -guide->moves_in_a;
+		while (guide->moves_in_a - 1 > 0)
+		{
+			rra(stack_a);
+			guide->moves_in_a--;
+			i++;
+		}
+	}
+	else
+	{
+		while (guide->moves_in_a - 1 > 0)
+		{
+			ra(stack_a);
+			guide->moves_in_a--;
+			i--;
+		}
+	}
+	pa(stack_a, stack_b);
+	if (guide->moves_in_a == 1 && (*stack_a)->index > (*stack_a)->next->index && (*stack_a)->index < (*stack_a)->next->next->index)
+		sa(stack_a);
+	else if (guide->moves_in_a > 0)
+		ra(stack_a);
+	if (stack_b)
+	{
+		j++;
+		if (i < 0)
+		{
+			free_all_action(*stack_a, *stack_b);
+			find_better_b(*stack_a, *stack_b);
+			target = check_finding_b(*stack_a, *stack_b);
+			if (target->moves_in_a > 0 && abs(i) >= target->moves_in_a)
+				do_action(stack_a, stack_b, target);
+			// print_stacks(*stack_a, *stack_b, target);
+		}
+		else if (i > 0)
+		{
+			free_all_action(*stack_a, *stack_b);
+			find_better_b(*stack_a, *stack_b);
+			target = check_finding_b(*stack_a, *stack_b);
+			if (target->moves_in_a <= 0 && i >= abs(target->moves_in_a))
+				do_action(stack_a, stack_b, target);
+		}
+	}
+	else
+		j = 0;
+	if (i > 0)
+	{
+		while (i > 0)
+		{
+			ra(stack_a);
+			i--;
+		}
+		if ((*stack_a)->index > (*stack_a)->next->index)
+			ra(stack_a);
+	}
+	else
+	{
+		while (i < 0)
+		{
+			rra(stack_a);
+			i++;
+		}
+	}
 }
 
 void	do_action_part2(t_stack **stack_a, t_stack **stack_b, int code, int action)
@@ -194,54 +290,16 @@ void	free_all_action(t_stack *a, t_stack *b)
 	while (a)
 	{
 		a->actions = 0;
+		a->moves_in_a = 0;
+		a->moves_in_b = 0;
 		a = a->next;
 	}
 	while (b)
 	{
 		b->actions = 0;
+		b->moves_in_a = 0;
+		b->moves_in_b = 0;
 		b = b->next;
-	}
-}
-
-void	magic(t_stack *a, t_stack *b)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 1;
-	while (b)
-	{
-		if (b->actions == 0)
-			angel_dust(a, b, i);
-		i += j;
-		b = b->next;
-		if (i > stack_size(b) / 2)
-		{
-			i = stack_size(b) - i;
-			j = -j;
-		}
-	}
-}
-
-void	angel_dust(t_stack *a, t_stack *b, int i)
-{
-	while(a)
-	{
-		if (a->index == b->index - 1 && a->next)
-		{
-			if (a->next->index == b->index + 1)
-				b->actions = i;
-		}
-		else if (a->index == b->index - 1 && !a->next)
-			b->actions = i;
-		if (b->actions != 0)
-		{
-			a->actions = 1;
-			return	;
-		}
-		i++;
-		a = a->next;
 	}
 }
 
