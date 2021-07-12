@@ -65,7 +65,7 @@ t_stack	*check_finding_b(t_stack *a, t_stack *b)
 			i = -i;
 		check_finding_a(a, b, i);
 		b->actions = abs(b->moves_in_a) + abs(b->moves_in_b);
-		if (b->actions < min_actions && abs(50 - b->index) < abs(50 - min_actions_elem->index))
+		if (b->actions < min_actions)
 		{
 			min_actions = b->actions;
 			min_actions_elem = stack_copy(min_actions_elem, b);
