@@ -48,14 +48,13 @@ void	sort_3numbers(t_stack **stack_a);
 void	sort_5numbers(t_stack **stack_a, t_stack **stack_b);
 void	sort_numbers(t_stack **stack_a, t_stack **stack_b);
 void	do_action(t_stack **stack_a, t_stack **stack_b, t_stack *guide);
-void	do_action_part2(t_stack **stack_a, t_stack **stack_b, int code, int action);
-int		find_min_action(t_stack *b, int	*code);
+void	moves_in_b(t_stack **stack_b, t_stack *guide);
+void	moves_in_a(t_stack **stack_a, t_stack *guide);
 void	free_all_action(t_stack *a, t_stack *b);
-void	find_better_b(t_stack *a, t_stack *b);
-void	find_better_a(t_stack *a, t_stack *b, int i);
-void	check_dubl(t_stack *a, t_stack *b);
+t_stack	*find_value_in_b(t_stack *a, t_stack *b);
+void	find_value_in_a(t_stack *a, t_stack *b, int i);
+void	check_value(t_stack *a, t_stack *b, int i, int j);
 int		find_need_index(t_stack *stack, int i);
-t_stack	*check_finding_b(t_stack *a, t_stack *b);
-void	check_finding_a(t_stack *a, t_stack *b, int i);
+int		now_sort(t_stack *a);
 
 #endif

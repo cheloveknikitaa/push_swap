@@ -6,7 +6,7 @@
 #    By: nikita <nikita@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/10 22:20:54 by caugusta          #+#    #+#              #
-#    Updated: 2021/07/11 07:24:16 by nikita           ###   ########.fr        #
+#    Updated: 2021/07/12 13:13:07 by nikita           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CFLAGS				= -Wall -Wextra -Werror -MMD -g
 
 OBJ_DIR				= object/
 SOURCE_DIR			= source/
-SOURCE				= main.c	parser.c	push_swap.c		reverse_rotate.c	rotate.c	stack_utils.c	processor.c
+SOURCE				= main.c	parser.c	push_swap.c		reverse_rotate.c	rotate.c	stack_utils.c	processor.c algoritm.c
 
 LIBFT				= libft/$(LIBFT_NAME)
 LIBFT_DIR			= libft/
