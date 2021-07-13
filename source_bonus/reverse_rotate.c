@@ -4,6 +4,8 @@ void	rra(t_stack **stack)
 {
 	t_stack	*prelast;
 
+	if (*stack == NULL)
+		return ;
 	prelast = *stack;
 	while (prelast->next->next != NULL)
 		prelast = prelast->next;
@@ -15,6 +17,8 @@ void	rrb(t_stack **stack)
 {
 	t_stack	*prelast;
 
+	if (*stack == NULL)
+		return ;
 	prelast = *stack;
 	while (prelast->next->next != NULL)
 		prelast = prelast->next;
@@ -27,6 +31,8 @@ void	rrr(t_stack **stack_a, t_stack **stack_b)
 	t_stack	*prelast_a;
 	t_stack	*prelast_b;
 
+	if (*stack_a == NULL || *stack_b == NULL)
+		return ;
 	prelast_a = *stack_a;
 	while (prelast_a->next->next != NULL)
 		prelast_a = prelast_a->next;

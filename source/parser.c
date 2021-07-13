@@ -16,8 +16,6 @@ void	pars(char **argv, t_stack **stack_a)
 		create_stack(a, stack_a);
 		i++;
 	}
-	if (stack_size(*stack_a) < 2)
-		exit_fun();
 	if (check_list(*stack_a) == 0)
 		exit_fun();
 	if (check_sort(*stack_a) == 0)

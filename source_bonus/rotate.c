@@ -4,6 +4,8 @@ void	ra(t_stack **stack)
 {
 	t_stack	*last;
 
+	if (*stack == NULL)
+		return ;
 	last = stack_last(*stack);
 	last->next = *stack;
 	last = last->next;
@@ -15,6 +17,8 @@ void	rb(t_stack **stack)
 {
 	t_stack	*last;
 
+	if (*stack == NULL)
+		return ;
 	last = stack_last(*stack);
 	last->next = *stack;
 	last = last->next;
@@ -27,6 +31,8 @@ void	rr(t_stack **stack_a, t_stack **stack_b)
 	t_stack	*last_a;
 	t_stack	*last_b;
 
+	if (*stack_a == NULL || *stack_b == NULL)
+		return ;
 	last_a = stack_last(*stack_a);
 	last_a->next = *stack_a;
 	last_a = last_a->next;
