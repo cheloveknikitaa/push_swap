@@ -36,7 +36,7 @@ sub_directory :
 	@mkdir -p $(OBJ_DIR)/gnl
 
 $(OBJ_DIR)%.o : %.c
-	$(CC) -g -c -MMD $(CFLAGS) $< -o $@
+	$(CC) -c -MMD $(CFLAGS) $< -o $@
 
 $(NAME) : $(OBJ)
 	ar rcs $(NAME) $?
