@@ -6,7 +6,7 @@
 /*   By: nikita <nikita@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 18:16:24 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/13 10:07:01 by nikita           ###   ########.fr       */
+/*   Updated: 2021/07/13 11:36:51 by nikita           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int	check_valid(char **argv)
 		while (argv[i][j])
 		{
 			if (ft_isdigit(argv[i][j]) || argv[i][j] == ' ' || \
-				argv[i][j] == '-' || argv[i][j] == '+')
+				(argv[i][j] == '-' && ft_isdigit(argv[i][j + 1])) || \
+				(argv[i][j] == '+' && ft_isdigit(argv[i][j + 1])))
 				j++;
 			else
 				return (0);

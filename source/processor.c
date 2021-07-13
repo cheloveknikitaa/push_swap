@@ -48,16 +48,6 @@ void	find_value_in_a(t_stack *a, t_stack *b, int i)
 
 void	check_value(t_stack *a, t_stack *b, int i, int j)
 {
-	if (a->index > b->index && a->next && \
-		b->moves_in_a == 0 && b->moves_in_a == 0)
-	{
-		if (a->next->index < b->index)
-		{
-			b->moves_in_b = i;
-			b->moves_in_a = j;
-			return ;
-		}
-	}
 	if (a->index < b->index && a->next)
 	{
 		if (a->next->index > b->index)
