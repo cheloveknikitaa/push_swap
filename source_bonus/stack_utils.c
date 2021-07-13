@@ -33,7 +33,7 @@ t_stack	*stack_last(t_stack *lst)
 	return (lst);
 }
 
-t_stack	*stack_new(int content)
+t_stack	*stack_new(long long content)
 {
 	t_stack		*new;
 

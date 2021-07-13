@@ -4,7 +4,7 @@
 
 typedef struct s_stack
 {
-	int				content;
+	long long		content;
 	int				index;
 	struct s_stack	*next;
 	int				moves_in_a;
@@ -36,7 +36,7 @@ void	exit_fun(void);
 void	stack_add_back(t_stack **lst, t_stack *new);
 void	stack_add_front(t_stack **lst, t_stack *new);
 t_stack	*stack_last(t_stack *lst);
-t_stack	*stack_new(int content);
+t_stack	*stack_new(long long content);
 t_stack	*stack_copy(t_stack *copy, t_stack *original);
 int		stack_size(t_stack *lst);
 void	print_stack(t_stack *stack);

@@ -54,7 +54,7 @@ void	create_stack(char **a, t_stack **stack_a)
 	while (a[j] != NULL)
 	{
 		new = stack_new(ft_atoi(a[j]));
-		if (new == NULL)
+		if (new == NULL || new->content < MIN_INT || new->content > MAX_INT)
 			exit_fun();
 		stack_add_back(stack_a, new);
 		j++;
