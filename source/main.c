@@ -1,16 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: nikita <nikita@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/18 19:44:50 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/13 10:49:09 by nikita           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "../includes/push_swap.h"
+#include "push_swap.h"
 
 int	main(int argc, char **argv)
 {
@@ -24,13 +12,15 @@ int	main(int argc, char **argv)
 	pars(argv, &stack_a);
 	if (stack_size(stack_a) <= 3)
 		sort_3numbers(&stack_a);
+	else if (stack_size(stack_a) == 4)
+		sort_4numbers(&stack_a, &stack_b);
 	else if (stack_size(stack_a) == 5)
 		sort_5numbers(&stack_a, &stack_b);
 	else
 		sort_numbers(&stack_a, &stack_b);
-	print_stacks(stack_a, stack_b, NULL);
 	if (check_sort(stack_a) == 0)
 		exit (0);
+	print_stacks(stack_a, stack_b, NULL);
 	return (0);
 }
 
@@ -61,6 +51,19 @@ void	sort_3numbers(t_stack **stack)
 	if (check_sort(*stack) == 0)
 		return ;
 	sort_3numbers(stack);
+}
+
+void	sort_4numbers(t_stack **stack_a, t_stack **stack_b)
+{
+	while (stack_size(*stack_a) > 3)
+	{
+		if ((*stack_a)->index == 1)
+			pb(stack_a, stack_b);
+		else
+			ra(stack_a);
+	}
+	sort_3numbers(stack_a);
+	pa(stack_a, stack_b);
 }
 
 void	sort_5numbers(t_stack **stack_a, t_stack **stack_b)

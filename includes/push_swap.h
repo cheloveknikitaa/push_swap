@@ -43,6 +43,7 @@ void	print_stack(t_stack *stack);
 void	print_stacks(t_stack *a, t_stack *b, t_stack *target);
 
 void	sort_3numbers(t_stack **stack_a);
+void	sort_4numbers(t_stack **stack_a, t_stack **stack_b);
 void	sort_5numbers(t_stack **stack_a, t_stack **stack_b);
 void	sort_numbers(t_stack **stack_a, t_stack **stack_b);
 void	do_action(t_stack **stack_a, t_stack **stack_b, t_stack *guide);

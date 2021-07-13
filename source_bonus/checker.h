@@ -30,7 +30,7 @@ void	pars(char **argv, t_stack **stack_a);
 int		check_valid(char **argv);
 void	create_stack(char **a, t_stack **stack_a);
 int		check_list(t_stack *stack_a);
-int		check_sort(t_stack *stack);
+int		check_sort(t_stack *stack, t_stack *stack_b);
 void	cs_2d_arr(char **s, int count);
 void	exit_fun(void);
 

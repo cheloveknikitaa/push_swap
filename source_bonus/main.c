@@ -24,40 +24,45 @@ int	main(int argc, char **argv)
 		free(line);
 		line = NULL;
 	}
-	check_sort(stack_a);
+	check_sort(stack_a, stack_b);
 	return (0);
 }
 
 void	all_command(char *line, t_stack **a, t_stack **b)
 {
-	if (ft_strncmp(line, "pa", 5))
+	if (ft_strncmp(line, "pa", 3) == 0)
 		pa(a, b);
-	else if (ft_strncmp(line, "pb", 5))
+	else if (ft_strncmp(line, "pb", 3) == 0)
 		pb(a, b);
-	else if (ft_strncmp(line, "rra", 5))
+	else if (ft_strncmp(line, "rra", 4) == 0)
 		rra(a);
-	else if (ft_strncmp(line, "rrb", 5))
+	else if (ft_strncmp(line, "rrb", 4) == 0)
 		rrb(b);
-	else if (ft_strncmp(line, "rrr", 5))
+	else if (ft_strncmp(line, "rrr", 4) == 0)
 		rrr(a, b);
-	else if (ft_strncmp(line, "ra", 5))
+	else if (ft_strncmp(line, "ra", 3) == 0)
 		ra(a);
-	else if (ft_strncmp(line, "rb", 5))
+	else if (ft_strncmp(line, "rb", 3) == 0)
 		rb(b);
-	else if (ft_strncmp(line, "rr", 5))
+	else if (ft_strncmp(line, "rr", 3) == 0)
 		rr(a, b);
-	else if (ft_strncmp(line, "sa", 5))
+	else if (ft_strncmp(line, "sa", 3) == 0)
 		sa(a);
-	else if (ft_strncmp(line, "sb", 5))
+	else if (ft_strncmp(line, "sb", 3) == 0)
 		sb(b);
-	else if (ft_strncmp(line, "ss", 5))
+	else if (ft_strncmp(line, "ss", 3) == 0)
 		ss(a, b);
 	else
 		exit_fun();
 }
 
-int	check_sort(t_stack *stack)
+int	check_sort(t_stack *stack, t_stack *stack_b)
 {
+	if (stack_b)
+	{
+		write(1, "KO\n", 3);
+		return (1);
+	}
 	while (stack)
 	{
 		if (stack->next)

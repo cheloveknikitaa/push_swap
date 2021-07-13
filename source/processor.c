@@ -1,4 +1,4 @@
-#include "../includes/push_swap.h"
+#include "push_swap.h"
 
 t_stack	*find_value_in_b(t_stack *a, t_stack *b)
 {
