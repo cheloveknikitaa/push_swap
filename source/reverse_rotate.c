@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikita <nikita@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 20:15:27 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/06 07:26:52 by caugusta         ###   ########.fr       */
+/*   Updated: 2021/07/13 10:30:06 by nikita           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	rra(t_stack **stack)
 {
-	t_stack *prelast;
+	t_stack	*prelast;
 
 	prelast = *stack;
 	while (prelast->next->next != NULL)
@@ -26,7 +26,7 @@ void	rra(t_stack **stack)
 
 void	rrb(t_stack **stack)
 {
-	t_stack *prelast;
+	t_stack	*prelast;
 
 	prelast = *stack;
 	while (prelast->next->next != NULL)
@@ -38,8 +38,8 @@ void	rrb(t_stack **stack)
 
 void	rrr(t_stack **stack_a, t_stack **stack_b)
 {
-	t_stack *prelast_a;
-	t_stack *prelast_b;
+	t_stack	*prelast_a;
+	t_stack	*prelast_b;
 
 	prelast_a = *stack_a;
 	while (prelast_a->next->next != NULL)

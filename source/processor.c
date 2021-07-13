@@ -17,7 +17,7 @@ t_stack	*find_value_in_b(t_stack *a, t_stack *b)
 		if (i > size / 2)
 			i = -i;
 		find_value_in_a(a, b, i);
-		b->actions = abs(b->moves_in_a) + abs(b->moves_in_b);
+		b->actions = ft_abs(b->moves_in_a) + ft_abs(b->moves_in_b);
 		if (b->actions < min_actions && b->actions != 0)
 		{
 			min_actions = b->actions;
@@ -48,7 +48,8 @@ void	find_value_in_a(t_stack *a, t_stack *b, int i)
 
 void	check_value(t_stack *a, t_stack *b, int i, int j)
 {
-	if (a->index > b->index && a->next && b->moves_in_a == 0 && b->moves_in_a == 0)
+	if (a->index > b->index && a->next && \
+		b->moves_in_a == 0 && b->moves_in_a == 0)
 	{
 		if (a->next->index < b->index)
 		{
@@ -66,13 +67,20 @@ void	check_value(t_stack *a, t_stack *b, int i, int j)
 			return ;
 		}
 	}
-	if (a->index < b->index && !a->next && b->moves_in_a == 0 && b->moves_in_a == 0)
+	check_value2(a, b, i, j);
+}
+
+void	check_value2(t_stack *a, t_stack *b, int i, int j)
+{
+	if (a->index < b->index && !a->next && \
+		b->moves_in_a == 0 && b->moves_in_a == 0)
 	{
 		b->moves_in_b = i;
 		b->moves_in_a = -1;
 		return ;
 	}
-	if (a->index > b->index && j == 1 && b->moves_in_a == 0 && b->moves_in_a == 0)
+	if (a->index > b->index && j == 1 && \
+		b->moves_in_a == 0 && b->moves_in_a == 0)
 	{
 		a = stack_last(a);
 		if (a->index < b->index)
@@ -84,7 +92,7 @@ void	check_value(t_stack *a, t_stack *b, int i, int j)
 	}
 }
 
-int		find_need_index(t_stack *stack, int i)
+int	find_need_index(t_stack *stack, int i)
 {
 	int	min;
 
@@ -96,19 +104,4 @@ int		find_need_index(t_stack *stack, int i)
 		stack = stack->next;
 	}
 	return (min);
-}
-
-int	now_sort(t_stack *a)
-{
-	int	i;
-
-	i = 0;
-	while (a)
-	{
-		if (a->index == 1)
-			return (i);
-		i++;
-		a = a->next;
-	}
-	return (i);
 }

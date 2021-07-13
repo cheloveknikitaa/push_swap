@@ -1,7 +1,6 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "libft.h"
-# include <math.h>
 
 typedef struct s_stack
 {
@@ -31,10 +30,9 @@ int		check_valid(char **argv);
 void	create_stack(char **a, t_stack **stack_a);
 int		check_list(t_stack *stack_a);
 int		check_sort(t_stack *stack);
-void	make_index(t_stack *stack_a);
-
-void	exit_fun(void);
 void	cs_2d_arr(char **s, int count);
+void	exit_fun(void);
+
 void	stack_add_back(t_stack **lst, t_stack *new);
 void	stack_add_front(t_stack **lst, t_stack *new);
 t_stack	*stack_last(t_stack *lst);
@@ -48,13 +46,18 @@ void	sort_3numbers(t_stack **stack_a);
 void	sort_5numbers(t_stack **stack_a, t_stack **stack_b);
 void	sort_numbers(t_stack **stack_a, t_stack **stack_b);
 void	do_action(t_stack **stack_a, t_stack **stack_b, t_stack *guide);
+void	moves_in_ab(t_stack **stack_a, t_stack **stack_b, t_stack *guide);
 void	moves_in_b(t_stack **stack_b, t_stack *guide);
 void	moves_in_a(t_stack **stack_a, t_stack *guide);
-void	free_all_action(t_stack *a, t_stack *b);
+void	free_all_action(t_stack *a, t_stack *b, t_stack *target);
+
 t_stack	*find_value_in_b(t_stack *a, t_stack *b);
 void	find_value_in_a(t_stack *a, t_stack *b, int i);
 void	check_value(t_stack *a, t_stack *b, int i, int j);
+void	check_value2(t_stack *a, t_stack *b, int i, int j);
 int		find_need_index(t_stack *stack, int i);
+void	final(t_stack **stack_a, int max_index);
 int		now_sort(t_stack *a);
+int		ft_abs(int	i);
 
 #endif

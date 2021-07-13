@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikita <nikita@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 20:01:24 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/06 07:23:56 by caugusta         ###   ########.fr       */
+/*   Updated: 2021/07/13 10:29:14 by nikita           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	pa(t_stack **stack_a, t_stack **stack_b)
 {
-	t_stack *keep;
+	t_stack	*keep;
 
 	keep = (*stack_b)->next;
 	if (stack_b == NULL)
@@ -26,7 +26,7 @@ void	pa(t_stack **stack_a, t_stack **stack_b)
 
 void	pb(t_stack **stack_a, t_stack **stack_b)
 {
-	t_stack *keep;
+	t_stack	*keep;
 
 	keep = (*stack_a)->next;
 	if (stack_a == NULL)
@@ -69,17 +69,17 @@ void	ss(t_stack **stack_a, t_stack **stack_b)
 
 	if (stack_a != NULL || (*stack_a)->next != NULL)
 	{
-	keeper_a = *stack_a;
-	*stack_a = (*stack_a)->next;
-	keeper_a->next = (*stack_a)->next;
-	(*stack_a)->next = keeper_a;
+		keeper_a = *stack_a;
+		*stack_a = (*stack_a)->next;
+		keeper_a->next = (*stack_a)->next;
+		(*stack_a)->next = keeper_a;
 	}
 	if (stack_b != NULL || (*stack_b)->next != NULL)
 	{
-	keeper_b = *stack_b;
-	*stack_b = (*stack_b)->next;
-	keeper_b->next = (*stack_b)->next;
-	(*stack_b)->next = keeper_b;
+		keeper_b = *stack_b;
+		*stack_b = (*stack_b)->next;
+		keeper_b->next = (*stack_b)->next;
+		(*stack_b)->next = keeper_b;
 	}
 	write(1, "ss\n", 3);
 }

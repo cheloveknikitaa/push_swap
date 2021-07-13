@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caugusta <caugusta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikita <nikita@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 20:07:47 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/06 07:28:25 by caugusta         ###   ########.fr       */
+/*   Updated: 2021/07/13 10:30:42 by nikita           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ra(t_stack **stack)
 {
-	t_stack *last;
+	t_stack	*last;
 
 	last = stack_last(*stack);
 	last->next = *stack;
@@ -26,7 +26,7 @@ void	ra(t_stack **stack)
 
 void	rb(t_stack **stack)
 {
-	t_stack *last;
+	t_stack	*last;
 
 	last = stack_last(*stack);
 	last->next = *stack;
@@ -38,8 +38,8 @@ void	rb(t_stack **stack)
 
 void	rr(t_stack **stack_a, t_stack **stack_b)
 {
-	t_stack *last_a;
-	t_stack *last_b;
+	t_stack	*last_a;
+	t_stack	*last_b;
 
 	last_a = stack_last(*stack_a);
 	last_a->next = *stack_a;

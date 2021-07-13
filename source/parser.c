@@ -6,7 +6,7 @@
 /*   By: nikita <nikita@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 18:16:24 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/09 23:47:54 by nikita           ###   ########.fr       */
+/*   Updated: 2021/07/13 10:07:01 by nikita           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	pars(char **argv, t_stack **stack_a)
 		exit (0);
 }
 
-int		check_valid(char **argv)
+int	check_valid(char **argv)
 {
 	int	i;
 	int	j;
@@ -47,7 +47,8 @@ int		check_valid(char **argv)
 		j = 0;
 		while (argv[i][j])
 		{
-			if (ft_isdigit(argv[i][j]) || argv[i][j] == ' ')
+			if (ft_isdigit(argv[i][j]) || argv[i][j] == ' ' || \
+				argv[i][j] == '-' || argv[i][j] == '+')
 				j++;
 			else
 				return (0);
@@ -74,7 +75,7 @@ void	create_stack(char **a, t_stack **stack_a)
 	cs_2d_arr(a, j);
 }
 
-int		check_list(t_stack *stack_a)
+int	check_list(t_stack *stack_a)
 {
 	t_stack	*tmp;
 	t_stack	*keep;
@@ -111,23 +112,6 @@ void	cs_2d_arr(char **s, int count)
 		s[count] = NULL;
 		count--;
 	}
-	free (s);
+	free(s);
 	s = NULL;
-}
-
-int		check_sort(t_stack *stack)
-{
-	while (stack)
-	{
-		if (stack->next)
-		{
-			if (stack->index < stack->next->index)
-				stack = stack->next;
-			else
-				return (1);
-		}
-		else
-			return (0);
-	}
-	return (0);
 }

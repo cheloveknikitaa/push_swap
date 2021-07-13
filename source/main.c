@@ -6,17 +6,11 @@
 /*   By: nikita <nikita@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 19:44:50 by caugusta          #+#    #+#             */
-/*   Updated: 2021/07/13 08:22:33 by nikita           ###   ########.fr       */
+/*   Updated: 2021/07/13 10:49:09 by nikita           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-void	exit_fun(void)
-{
-	write(1, "Error\n", 7);
-	exit (1);
-}
 
 int	main(int argc, char **argv)
 {
@@ -34,10 +28,10 @@ int	main(int argc, char **argv)
 		sort_5numbers(&stack_a, &stack_b);
 	else
 		sort_numbers(&stack_a, &stack_b);
-// 	ft_printf("---stack_a\n");
-// 	print_stack(stack_a);
-// 	ft_printf("---stack_b\n");
-// 	print_stack(stack_b);
+	print_stacks(stack_a, stack_b, NULL);
+	if (check_sort(stack_a) == 0)
+		exit (0);
+	return (0);
 }
 
 void	sort_3numbers(t_stack **stack)
@@ -93,4 +87,28 @@ void	sort_5numbers(t_stack **stack_a, t_stack **stack_b)
 	sort_3numbers(stack_a);
 	pa(stack_a, stack_b);
 	pa(stack_a, stack_b);
+}
+
+void	sort_numbers(t_stack **stack_a, t_stack **stack_b)
+{
+	t_stack	*target;
+	int		max_index;
+
+	max_index = stack_size(*stack_a);
+	while (stack_size(*stack_a) > 5)
+	{
+		if ((*stack_a)->index == 1 || (*stack_a)->index == max_index || \
+			(*stack_a)->index == max_index / 2)
+			ra(stack_a);
+		else
+			pb(stack_a, stack_b);
+	}
+	sort_5numbers(stack_a, stack_b);
+	while (stack_size(*stack_b))
+	{
+		target = find_value_in_b(*stack_a, *stack_b);
+		do_action(stack_a, stack_b, target);
+		free_all_action(*stack_a, *stack_b, target);
+	}
+	final(stack_a, max_index);
 }
